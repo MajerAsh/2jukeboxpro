@@ -26,11 +26,10 @@ describe("POST /users/register", () => {
       username: "eFa7xWeIF5A3cpF5JrM1UzsI",
       password: "password123",
     });
-
     const {
       rows: [user],
     } = await db.query(
-      "SELECT * FROM users WHERE username = 'eFa7xWeIF5A3cpF5JrM1UzsI'",
+      "SELECT * FROM users WHERE username = 'eFa7xWeIF5A3cpF5JrM1UzsI'"
     );
     expect(user).toBeDefined();
     expect(user).toHaveProperty("password");
@@ -84,6 +83,8 @@ describe("Protected routes", () => {
         .post("/playlists")
         .set("Authorization", `Bearer ${token}`)
         .send(newPlaylist);
+      console.log("response:", response);
+
       expect(response.status).toBe(201);
       expect(response.body).toHaveProperty("id");
       newPlaylist.id = response.body.id;
@@ -103,7 +104,7 @@ describe("Protected routes", () => {
         .set("Authorization", `Bearer ${token}`);
       expect(response.status).toBe(200);
       expect(response.body).toEqual(
-        expect.arrayContaining([expect.objectContaining(newPlaylist)]),
+        expect.arrayContaining([expect.objectContaining(newPlaylist)])
       );
     });
   });
@@ -180,7 +181,7 @@ describe("Protected routes", () => {
         .set("Authorization", `Bearer ${token}`);
       expect(response.status).toBe(200);
       expect(response.body).toEqual(
-        expect.arrayContaining([expect.objectContaining(newPlaylist)]),
+        expect.arrayContaining([expect.objectContaining(newPlaylist)])
       );
     });
   });

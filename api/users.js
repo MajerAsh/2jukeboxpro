@@ -1,4 +1,5 @@
 import express from "express";
+import bcrypt from "bcrypt";
 const router = express.Router();
 export default router;
 
@@ -32,7 +33,7 @@ router.post(
     const user = await getUserByUsername(username);
     if (!user) return res.status(401).send("Invalid credentials");
 
-    const match = (await password) === user.password;
+    const match = await bcrypt.compare(password, user.password);
     console.log("password", password);
     console.log("user", user);
     console.log("match", match);
