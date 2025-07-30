@@ -1,6 +1,8 @@
 import express from "express";
 const app = express();
 export default app;
+import usersRouter from "#api/users";
+app.use("/users", usersRouter);
 
 import morgan from "morgan";
 
